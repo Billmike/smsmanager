@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/Billmike/smsmanager/badge.svg?branch=develop)](https://coveralls.io/github/Billmike/smsmanager?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/Billmike/smsmanager/badge.svg?branch=develop)](https://coveralls.io/github/Billmike/smsmanager?branch=develop) [![Build Status](https://travis-ci.org/Billmike/smsmanager.svg?branch=develop)](https://travis-ci.org/Billmike/smsmanager)
 
 # SMS Manager
 
