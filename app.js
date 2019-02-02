@@ -6,6 +6,7 @@ dotenv.config()
 
 const app = express();
 const contact = require('./routes/contact.routes');
+const message = require('./routes/message.route');
 const port = 8080;
 
 app.use(express.urlencoded({ extended: false }));
@@ -21,6 +22,7 @@ let dbConnection = mongoose.connection;
 dbConnection.on('error', console.error.bind(console, 'MONGODB error connection'))
 
 app.use('/contact', contact);
+app.use('/message', message);
 
 app.listen(port, () => {
   console.log(`Starting app on PORT ${port}`)
