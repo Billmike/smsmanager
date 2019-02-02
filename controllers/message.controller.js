@@ -42,4 +42,58 @@ exports.sendMessage = (request, response) => {
       status: 'Failed'
     })
   })
+};
+
+exports.fetchSentMessage = (request, response) => {
+  return Contact.findById({
+    _id: request.params.userId
+  }).then(contact => {
+    if (!contact) {
+      return response.status(404).json({
+        message: 'Contact not found'
+      })
+    };
+
+    return Message.find({
+      senderContact: contact.phoneNumber
+    }).then(sentMessages => {
+      return response.status(200).json({
+        message: 'Fetched all sent messages',
+        smsData: {
+          sentMessages
+        }
+      })
+    })
+  }).catch(error => {
+    return response.status(500).json({
+      message: 'An error occurred'
+    })
+  })
+}
+
+exports.fetchReceivedMessage = (request, response) => {
+  return Contact.findById({
+    _id: request.params.userId
+  }).then(contact => {
+    if (!contact) {
+      return response.status(404).json({
+        message: 'No user found'
+      });
+    }
+
+    return Message.find({
+      receiverContact: contact.phoneNumber
+    }).then(receivedMessages => {
+      return response.status(200).json({
+        message: 'Fetched all received messages',
+        smsData: {
+          receivedMessages
+        }
+      })
+    })
+  }).catch(() => {
+    return response.status(500).json({
+      message: 'An error occurred'
+    });
+  });
 }
