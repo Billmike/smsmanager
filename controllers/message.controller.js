@@ -1,7 +1,14 @@
 const Message = require('../models/message.model');
 const Contact = require('../models/contacts.model');
+const validateMessage = require('../validators/create_message.validator');
 
 exports.sendMessage = (request, response) => {
+  const { errors, isValid } = validateMessage(request.body);
+
+  if (!isValid) {
+    return response.status(400).json(errors);
+  }
+
   return Contact.findOne({
     phoneNumber: request.body.senderContact
   }).then((senderNumber) => {
